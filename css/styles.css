@@ -1,0 +1,1549 @@
+/* =========================================================
+   FONTS
+   ========================================================= */
+
+@font-face {
+  font-family: 'Ithaca';
+  src: url('../assets/fonts/Ithaca-LVB75.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Secondary font: Pet The Cat button + "Move the mouse" text */
+@font-face {
+  font-family: 'Irish Grover';
+  src: url('../assets/fonts/IrishGrover-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Prstartk';
+  src: url('../assets/fonts/prstartk.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 38%;
+}
+
+
+/* =========================================================
+   GENERAL
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+}
+
+body {
+  background: #fff;
+}
+
+
+.scene {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 1920px;
+  height: 1080px;
+
+  overflow: hidden;
+
+  background: #fff;
+
+  transform-origin: top left;
+}
+
+.stage {
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 1920px;
+  height: 1080px;
+}
+
+
+/* =========================================================
+   DRAGGABLE CURSOR
+   ========================================================= */
+
+.cursor-mark {
+  position: absolute;
+
+  width: 110px;
+  height: 116px;
+  padding: 11.5px 11px;
+
+  left: 1230px;
+  top: 560px;
+
+  z-index: 50;
+
+  filter:
+    drop-shadow(
+      2px 8px 3px rgba(0, 0, 0, .35)
+    );
+
+  cursor: grab;
+
+  touch-action: none;
+
+  user-select: none;
+
+  -webkit-user-drag: none;
+
+  transition: none;
+}
+
+.cursor-mark:active {
+  cursor: grabbing;
+}
+
+
+/* =========================================================
+   FISH (appears when the cat is angry)
+   ========================================================= */
+
+.fish {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 130px;
+  height: 70px;
+
+  z-index: 49;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(.5);
+
+  filter: drop-shadow(2px 6px 3px rgba(0, 0, 0, .3));
+
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-drag: none;
+
+  transition:
+    opacity .4s ease,
+    transform .4s ease;
+}
+
+.fish.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
+.fish.is-dragging {
+  cursor: grabbing;
+  transform: scale(1.08) rotate(-6deg);
+  transition: opacity .4s ease, transform .15s ease;
+}
+
+.fish.is-returning {
+  transition:
+    left .4s ease,
+    top .4s ease,
+    opacity .4s ease,
+    transform .4s ease;
+}
+
+.fish.is-eaten {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(.1);
+  transition:
+    left .35s ease,
+    top .35s ease,
+    opacity .35s ease .1s,
+    transform .35s ease;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.masthead {
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 1920px;
+  height: 270px;
+
+  border: 10px solid transparent;
+}
+
+.masthead::before {
+  content: "";
+  position: absolute;
+
+  left: -4000px;
+  right: -4000px;
+  top: -4000px;
+  bottom: -10px;
+
+  background: #d2deff;
+
+  border-bottom: 10px solid #9da2ff;
+
+  box-shadow:
+    6px 10px 4px rgba(215, 13, 255, .19);
+
+  z-index: -1;
+}
+
+
+h1 {
+  position: absolute;
+
+  left: 500px;
+  top: 37px;
+
+  width: 900px;
+  height: 160px;
+
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  white-space: nowrap;
+
+  color: #3c3ca8;
+
+  font:
+    400 180px/1
+    'Ithaca',
+    'Prstartk',
+    monospace;
+
+  letter-spacing: 9px;
+
+  text-shadow:
+     7px  0   0 #b482e6,
+    -7px  0   0 #b482e6,
+     0    7px 0 #b482e6,
+     0   -7px 0 #b482e6,
+     7px  7px 0 #b482e6,
+    -7px  7px 0 #b482e6,
+     7px -7px 0 #b482e6,
+    -7px -7px 0 #b482e6,
+     0   11px 5px #0018b3;
+
+  text-align: center;
+}
+
+
+.title-star {
+  position: absolute;
+
+  width: 111px;
+  height: 156px;
+
+  top: 39px;
+
+  filter:
+    drop-shadow(
+      4.5px 3px 5.5px rgba(43, 24, 210, .62)
+    );
+}
+
+
+.title-star-left {
+  left: 381.5px;
+}
+
+
+.title-star-right {
+  right: 381.5px;
+}
+
+
+/* =========================================================
+   SIDE STARS
+   ========================================================= */
+
+.side-stars {
+  position: absolute;
+
+  top: calc(292px + var(--shift, 0px));
+
+  width: 396px;
+  height: 396px;
+}
+
+
+.side-stars-left {
+  left: 52px;
+}
+
+
+.side-stars-right {
+  right: 52px;
+  top: calc(252px + var(--shift, 0px));
+}
+
+
+.side-stars .star {
+  position: absolute;
+
+  transition: opacity .6s ease;
+
+  /* same soft blue shadow the Figma export had, drawn by the browser
+     (crisp at any size) instead of inside the SVG */
+  filter:
+    drop-shadow(
+      3.5px 2.5px 4px rgba(43, 24, 210, .62)
+    );
+}
+
+
+.side-stars-left .star-a {
+  width: 82.8px;
+  height: 82.8px;
+
+  left: 10.8px;
+  top: 32.4px;
+}
+
+
+.side-stars-left .star-b {
+  width: 108px;
+  height: 108px;
+
+  left: 140.4px;
+  top: 18px;
+}
+
+
+.side-stars-left .star-c {
+  width: 72px;
+  height: 72px;
+
+  left: 82.8px;
+  top: 165.6px;
+}
+
+
+.side-stars-right .star-a {
+  width: 82.8px;
+  height: 82.8px;
+
+  right: 165.6px;
+  top: 61.2px;
+}
+
+
+.side-stars-right .star-b {
+  width: 118.8px;
+  height: 118.8px;
+
+  right: 10.8px;
+  top: 82.8px;
+}
+
+
+.side-stars-right .star-c {
+  width: 72px;
+  height: 72px;
+
+  right: 82.8px;
+  top: 216px;
+}
+
+
+/* hearts that swap in for the stars while the cat is happy */
+.side-stars .side-hearts {
+  position: absolute;
+
+  width: 250px;
+  height: 193px;
+
+  left: 56px;
+  top: 28px;
+
+  opacity: 0;
+  transition: opacity .6s ease;
+
+  filter:
+    drop-shadow(
+      5.4px 6.8px 5.4px rgba(19, 0, 189, .53)
+    );
+}
+
+.side-stars-right .side-hearts {
+  left: auto;
+  right: 56px;
+  top: 70px;
+
+  transform: rotate(8deg);
+}
+
+.stage:has(.cat-wrap.is-petting) .side-stars .star {
+  opacity: 0;
+}
+
+.stage:has(.cat-wrap.is-petting) .side-stars .side-hearts {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   PLAYGROUND
+   ========================================================= */
+
+.playground {
+  position: absolute;
+
+  width: 979px;
+  height: calc(650px + var(--box-extra, 0px));
+
+  left: 50%;
+  top: calc(290px + var(--shift, 0px));
+
+  transform: translateX(-50%) scale(var(--grow, 1));
+  transform-origin: top center;
+
+  background: #e6e8ff;
+
+  border: 7px solid #425bff;
+
+  box-shadow:
+    9px 7px 4px rgba(0, 24, 179, .78);
+
+  overflow: hidden;
+}
+
+/*
+  Pink tint while the cat is happy
+*/
+.playground::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background: #ff8cd9;
+
+  opacity: 0;
+  transition: opacity .6s ease;
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+.playground:has(.cat-wrap.is-petting)::before {
+  opacity: .28;
+}
+
+
+/* =========================================================
+   WATCHING TEXT
+   ========================================================= */
+
+.watching-text {
+  display: grid;
+  justify-items: center;
+  position: absolute;
+
+  top: 22px;
+  left: 0;
+
+  width: 100%;
+  text-align: center;
+
+  margin: 0;
+
+  color: #380052;
+
+  font:
+    400 40px/1
+    'Irish Grover',
+    cursive;
+
+  white-space: nowrap;
+}
+
+.watching-text > span {
+  grid-area: 1 / 1;
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+.watching-text .watch-angry {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.playground:has(.cat-wrap.is-angry) .watch-normal {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.playground:has(.cat-wrap.is-angry) .watch-angry {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* =========================================================
+   CAT SHADOW
+   ========================================================= */
+
+.cat-shadow {
+  position: absolute;
+
+  width: 268px;
+  height: 54px;
+
+  left: 318px;
+  top: 402px;
+
+  background: #bfc3f7;
+
+  border-radius: 50%;
+
+  opacity: .75;
+
+  z-index: 1;
+
+  transform: scale(var(--cat-grow, 1));
+  transform-origin: 179.5px -315px;
+}
+
+
+/* =========================================================
+   CAT
+   ========================================================= */
+
+.cat-wrap {
+  position: absolute;
+
+  width: 293px;
+  height: 358px;
+
+  left: 351px;
+  top: 87px;
+
+  z-index: 2;
+
+  transform: scale(var(--cat-grow, 1));
+  transform-origin: 50% 0;
+
+}
+
+
+.cat-wrap img {
+  position: absolute;
+
+  display: block;
+
+  max-width: none;
+}
+
+
+/* Tail */
+
+.cat-tail {
+  left: 170px;
+  top: 160px;
+
+  width: 104px;
+  height: 154px;
+
+  z-index: 1;
+
+  transform: rotate(180deg);
+}
+
+
+/* Ears */
+
+.cat-left-ear {
+  left: 56px;
+  top: 10px;
+
+  width: 40px;
+  height: 86px;
+
+  z-index: 2;
+}
+
+
+.cat-right-ear {
+  left: 154px;
+  top: 10px;
+
+  width: 40px;
+  height: 85px;
+
+  z-index: 2;
+}
+
+
+/* Feet */
+
+.cat-left-foot {
+  left: 60px;
+  top: 325px;
+
+  width: 48px;
+  height: 18px;
+
+  z-index: 3;
+}
+
+
+.cat-right-foot {
+  left: 140px;
+  top: 325px;
+
+  width: 48px;
+  height: 18px;
+
+  z-index: 3;
+}
+
+
+/* Body */
+
+.cat-body {
+  left: 52px;
+  top: 140px;
+
+  width: 149px;
+  height: 194px;
+
+  z-index: 4;
+}
+
+
+/* Head */
+
+.cat-head {
+  left: 51px;
+  top: 38px;
+
+  width: 149px;
+  height: 128px;
+
+  z-index: 5;
+}
+
+
+/* Stomach */
+
+.cat-stomach {
+  left: 107px;
+  top: 190px;
+
+  width: 40px;
+  height: 129px;
+
+  z-index: 6;
+}
+
+
+/* Eyes */
+
+.cat-left-eye {
+  left: 72px;
+  top: 74px;
+
+  width: 33px;
+  height: 48px;
+
+  z-index: 7;
+}
+
+
+.cat-right-eye {
+  left: 139px;
+  top: 76px;
+
+  width: 32px;
+  height: 47px;
+
+  z-index: 7;
+}
+
+
+/* Pupils */
+
+.cat-pupil {
+  z-index: 8;
+
+  width: 22px;
+  height: 22px;
+
+  will-change: transform;
+}
+
+
+.cat-pupil-left {
+  left: 77.5px;
+  top: 87px;
+}
+
+.cat-pupil-right {
+  left: 144px;
+  top: 88.5px;
+}
+
+
+/* Nose */
+
+.cat-nose {
+  left: 119px;
+  top: 125px;
+
+  width: 9px;
+  height: 6px;
+
+  z-index: 9;
+}
+
+
+/* Mouth */
+
+.cat-mouth {
+  left: 115px;
+  top: 131px;
+
+  width: 17px;
+  height: 10px;
+
+  z-index: 9;
+}
+
+
+/* Whiskers */
+
+.cat-whiskers {
+  left: 0;
+  top: 125px;
+
+  width: 248px;
+  height: 44px;
+
+  z-index: 9;
+}
+
+
+/* =========================================================
+   HAPPY CAT
+   Shown while the dragged cursor hovers over the cat.
+   Only the tail, eyes, nose, mouth and whiskers change.
+   ========================================================= */
+
+.cat-wrap {
+  --mood-fade: .6s;
+}
+
+.cat-wrap .cat-tail,
+.cat-wrap .cat-left-eye,
+.cat-wrap .cat-right-eye,
+.cat-wrap .cat-pupil,
+.cat-wrap .cat-nose,
+.cat-wrap .cat-mouth,
+.cat-wrap .cat-whiskers,
+.cat-wrap .happy-part,
+.cat-wrap .angry-part {
+  transition: opacity var(--mood-fade) ease;
+}
+
+.cat-wrap .happy-part {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cat-wrap.is-happy .happy-part {
+  opacity: 1;
+}
+
+.cat-wrap.is-happy .cat-tail,
+.cat-wrap.is-happy .cat-left-eye,
+.cat-wrap.is-happy .cat-right-eye,
+.cat-wrap.is-happy .cat-pupil,
+.cat-wrap.is-happy .cat-nose,
+.cat-wrap.is-happy .cat-mouth,
+.cat-wrap.is-happy .cat-whiskers {
+  opacity: 0;
+}
+
+.cat-happy-tail {
+  left: -59px;
+  top: 142px;
+
+  width: 159px;
+  height: 172px;
+
+  z-index: 1;
+}
+
+/* > < eyes */
+.cat-happy-left-eye {
+  left: 75px;
+  top: 98px;
+
+  width: 31px;
+  height: 24px;
+
+  z-index: 7;
+}
+
+.cat-happy-right-eye {
+  left: 147px;
+  top: 99px;
+
+  width: 31px;
+  height: 22px;
+
+  z-index: 7;
+}
+
+/* Nose and smile */
+.cat-happy-nose {
+  left: 118px;
+  top: 133px;
+
+  width: 11px;
+  height: 7px;
+
+  z-index: 9;
+}
+
+.cat-happy-smile {
+  left: 114px;
+  top: 149px;
+
+  width: 20px;
+  height: 4px;
+
+  z-index: 9;
+}
+
+/* Whiskers: two per side */
+.cat-happy-whisker-3 {   /* left, upper */
+  left: -9px;
+  top: 108px;
+
+  width: 95px;
+  height: 24px;
+
+  z-index: 9;
+}
+
+.cat-happy-whisker-4 {   /* left, lower */
+  left: -7px;
+  top: 123px;
+
+  width: 93px;
+  height: 12px;
+
+  z-index: 9;
+}
+
+.cat-happy-whisker-1 {   /* right, upper */
+  left: 164px;
+  top: 109px;
+
+  width: 91px;
+  height: 24px;
+
+  z-index: 9;
+}
+
+.cat-happy-whisker-2 {   /* right, lower */
+  left: 166px;
+  top: 127px;
+
+  width: 89px;
+  height: 10px;
+
+  z-index: 9;
+}
+
+
+/* =========================================================
+   ANGRY CAT
+   Shown while the cursor is on the cat's tail or stomach
+   ========================================================= */
+
+.cat-wrap .angry-part {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cat-wrap.is-angry .angry-part {
+  opacity: 1;
+}
+
+/* angry wins over happy if both classes are on at once */
+.cat-wrap.is-angry .happy-part {
+  opacity: 0;
+}
+
+.cat-wrap.is-angry .cat-tail,
+.cat-wrap.is-angry .cat-left-eye,
+.cat-wrap.is-angry .cat-right-eye,
+.cat-wrap.is-angry .cat-pupil,
+.cat-wrap.is-angry .cat-mouth,
+.cat-wrap.is-angry .cat-whiskers {
+  opacity: 0;
+}
+
+.cat-wrap.is-angry .cat-nose {
+  opacity: 1;
+}
+
+.cat-angry-tail {
+  left: 160px;
+  top: 191px;
+
+  width: 154px;
+  height: 146px;
+
+  z-index: 1;
+}
+
+.cat-angry-left-eye {
+  left: 94px;
+  top: 93px;
+
+  width: 14px;
+  height: 21px;
+
+  z-index: 8;
+}
+
+.cat-angry-right-eye {
+  left: 142px;
+  top: 93px;
+
+  width: 14px;
+  height: 21px;
+
+  z-index: 8;
+}
+
+.cat-angry-left-brow {
+  left: 77px;
+  top: 77px;
+
+  width: 28px;
+  height: 19px;
+
+  z-index: 8;
+}
+
+.cat-angry-right-brow {
+  left: 146px;
+  top: 78px;
+
+  width: 28px;
+  height: 18px;
+
+  z-index: 8;
+}
+
+.cat-angry-mouth {
+  left: 113px;
+  top: 140px;
+
+  width: 20px;
+  height: 4px;
+
+  z-index: 9;
+}
+
+.cat-angry-whisker-3 {   /* left, upper */
+  left: -6px;
+  top: 121px;
+
+  width: 94px;
+  height: 24px;
+
+  z-index: 9;
+}
+
+.cat-angry-whisker-4 {   /* left, lower */
+  left: 2px;
+  top: 126px;
+
+  width: 85px;
+  height: 35px;
+
+  z-index: 9;
+}
+
+.cat-angry-whisker-1 {   /* right, upper */
+  left: 161px;
+  top: 121px;
+
+  width: 90px;
+  height: 21px;
+
+  z-index: 9;
+}
+
+.cat-angry-whisker-2 {   /* right, lower */
+  left: 162px;
+  top: 126px;
+
+  width: 80px;
+  height: 36px;
+
+  z-index: 9;
+}
+
+
+/* =========================================================
+   "HOLD" HINT + HEARTS
+   ========================================================= */
+
+.cat-wrap .hold-text {
+  position: absolute;
+
+  left: 206px;
+  top: 52px;
+
+  z-index: 20;
+
+  color: transparent;
+  -webkit-text-stroke: 1.6px #c18ae6;
+
+  font:
+    400 34px/1
+    'Irish Grover',
+    cursive;
+
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+
+  opacity: 0;
+  transform: translateX(-8px) rotate(-2deg);
+
+  transition:
+    opacity .2s ease,
+    transform .25s ease;
+}
+
+.cat-wrap.is-over-head .hold-text {
+  opacity: 1;
+  transform: translateX(0) rotate(-2deg);
+}
+
+
+.cat-wrap .hearts {
+  position: absolute;
+  inset: 0;
+
+  z-index: 20;
+
+  pointer-events: none;
+}
+
+.cat-wrap .heart {
+  position: absolute;
+
+  left: calc(var(--x) - var(--s) / 2);
+  top: calc(var(--y) - var(--s) * .455);
+
+  width: var(--s);
+  height: calc(var(--s) * .91);  
+
+  opacity: 0;
+  transform: scale(0) rotate(var(--r));
+
+  transition:
+    opacity .2s ease var(--d),
+    transform .4s cubic-bezier(.3, 1.7, .5, 1) var(--d);
+}
+
+.cat-wrap .heart img {
+  position: static;
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  filter:
+    drop-shadow(
+      4px 5px 1px rgba(60, 60, 190, .7)
+    );
+}
+
+.cat-wrap.is-petting .heart {
+  opacity: 1;
+  transform: scale(1) rotate(var(--r));
+}
+
+.cat-wrap.is-petting .heart img {
+  animation: heart-bob 1.8s ease-in-out infinite;
+  animation-delay: var(--d);
+}
+
+@keyframes heart-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+
+
+/* ================
+   PET THE CAT 
+   ================ */
+
+.pet-label {
+  position: absolute;
+
+  left: 50%;
+  top: calc(505px + var(--box-extra, 0px));
+
+  transform: translateX(-50%);
+
+  width: 500px;
+  height: 78px;
+
+  color: #380052;
+
+  font:
+    400 40px/1
+    'Irish Grover',
+    cursive;
+
+  text-shadow:
+    0 3px 4px rgba(112, 0, 162, .25);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  user-select: none;
+  pointer-events: none;
+
+  z-index: 3;
+}
+
+
+/*
+  The label's words change with the cat's mood:
+*/
+.pet-label .pet-label-text {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  white-space: nowrap;
+
+  opacity: 0;
+  transform: translateY(6px);
+
+  transition:
+    opacity .35s ease,
+    transform .35s ease;
+}
+
+.pet-label .pet-label-normal {
+  opacity: 1;
+  transform: none;
+}
+
+/* normal text steps aside whenever the cat is happy or angry */
+.playground:has(.cat-wrap.is-happy, .cat-wrap.is-angry) .pet-label-normal {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+/* happy (but not being petted yet) */
+.playground:has(.cat-wrap.is-happy:not(.is-angry):not(.is-petting):not(.is-fed)) .pet-label-happy {
+  opacity: 1;
+  transform: none;
+}
+
+/* being petted: hearts are showing */
+.playground:has(.cat-wrap.is-petting:not(.is-fed)) .pet-label-petting {
+  opacity: 1;
+  transform: none;
+}
+
+/* angry */
+.playground:has(.cat-wrap.is-angry:not(.fish-over)) .pet-label-angry {
+  opacity: 1;
+  transform: none;
+}
+
+/* fish is being held over the cat: tell the player to let go */
+.playground:has(.cat-wrap.is-angry.fish-over) .pet-label-drop {
+  opacity: 1;
+  transform: none;
+}
+
+/* just ate the fish */
+.playground:has(.cat-wrap.is-fed) .pet-label-fed {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* =========================================================
+   LEGEND
+   ========================================================= */
+
+.legend {
+  position: absolute;
+
+  top: calc(960px + var(--shift, 0px) + var(--grow-extra, 0px));
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 75px;
+
+  color: #380052;
+
+  font:
+    400 25px/1
+    'Mountains of Christmas',
+    cursive;
+
+  z-index: 5;
+}
+
+
+.legend-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  min-width: 115px;
+}
+
+
+/* =========================================================
+   HAPPY ICON
+   ========================================================= */
+
+.mood-icon {
+  position: relative;
+
+  display: inline-block;
+
+  width: 55px;
+  height: 38px;
+}
+
+
+.mood-happy {
+  width: 110px;
+  height: 76px;
+}
+
+.mood-happy .mood-head {
+  position: absolute;
+
+  width: 76px;
+  height: 66px;
+
+  left: 17px;
+  top: 5px;
+}
+
+
+/* =========================================================
+   ANGRY ICON
+   ========================================================= */
+
+.mood-angry {
+  width: 110px;
+  height: 76px;
+}
+
+.mood-angry .mood-head {
+  position: absolute;
+
+  /* Angry Head.svg is 71 x 47; shown at the same visual size as the happy head */
+  width: 81px;
+  height: 54px;
+
+  left: 14.5px;
+  top: 11px;
+}
+
+/* =========================================================
+   PURPLE OUTER FRAME
+   ========================================================= */
+
+.frame-border {
+  position: absolute;
+
+  /* fills the whole viewport, so it always reaches every edge */
+  inset: 0;
+
+  border: 24px solid #7000a2;
+
+  pointer-events: none;
+
+  z-index: 100;
+}
+
+
+/* =========================================================
+   HELP BUTTON + POPUP
+   ========================================================= */
+
+.help-button {
+  position: fixed;
+
+  right: calc(24px * var(--ui-scale, 1) + 16px);
+  bottom: calc(24px * var(--ui-scale, 1) + 16px);
+
+  width: clamp(42px, calc(53px * var(--ui-scale, 1)), 64px);
+  height: clamp(42px, calc(53px * var(--ui-scale, 1)), 64px);
+
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+
+  background: #fff;
+
+  box-shadow:
+    3px 4px 3px rgba(19, 0, 189, .35);
+
+  cursor: pointer;
+
+  z-index: 200;
+
+  transition:
+    transform .15s ease,
+    box-shadow .15s ease;
+}
+
+.help-button:hover {
+  transform: scale(1.08);
+}
+
+.help-button:active {
+  transform: scale(.96);
+}
+
+.help-button:focus-visible,
+.help-close:focus-visible {
+  outline: 3px solid #425bff;
+  outline-offset: 3px;
+}
+
+.help-button img {
+  position: absolute;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.help-circle {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.help-mark {
+  left: 50%;
+  top: 50%;
+
+  height: 49%;
+  width: auto;
+
+  transform: translate(-50%, -50%);
+}
+
+
+/* ---------- popup ---------- */
+
+.help-modal {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 16px;
+
+  background: rgba(56, 0, 82, .45);
+
+  z-index: 300;
+
+  animation: help-fade .2s ease;
+}
+
+.help-modal[hidden] {
+  display: none;
+}
+
+.help-dialog {
+  position: relative;
+
+  width: min(100%, 520px);
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+
+  padding: 28px 30px 30px;
+
+  background: #e6e8ff;
+
+  border: 6px solid #425bff;
+  border-radius: 6px;
+
+  box-shadow:
+    8px 7px 4px rgba(0, 24, 179, .78);
+
+  color: #380052;
+
+  font-family: 'Irish Grover', cursive;
+
+  animation: help-pop .25s cubic-bezier(.3, 1.4, .5, 1);
+}
+
+.help-dialog h2 {
+  margin: 0 44px 16px 0;
+
+  font: 400 32px/1.1 'Irish Grover', cursive;
+
+  color: #7000a2;
+}
+
+.help-list {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+
+  display: grid;
+  gap: 14px;
+}
+
+.help-list li {
+  position: relative;
+
+  padding-left: 26px;
+
+  font-size: 17px;
+  line-height: 1.4;
+}
+
+.help-list li::before {
+  content: "";
+
+  position: absolute;
+  left: 2px;
+  top: .35em;
+
+  width: 12px;
+  height: 12px;
+
+  background: #bd7fed;
+
+  /* little four-point star bullet */
+  clip-path:
+    polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+}
+
+.help-list strong {
+  font-weight: 400;
+  color: #7000a2;
+}
+
+.help-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  width: 40px;
+  height: 40px;
+
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background .15s ease;
+}
+
+.help-close:hover {
+  background: #d2deff;
+}
+
+.help-close svg {
+  width: 22px;
+  height: 22px;
+
+  fill: none;
+  stroke: #7000a2;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+@keyframes help-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes help-pop {
+  from { opacity: 0; transform: translateY(10px) scale(.96); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (max-width: 480px) {
+
+  .help-dialog {
+    padding: 24px 20px 24px;
+  }
+
+  .help-dialog h2 {
+    font-size: 26px;
+  }
+
+  .help-list li {
+    font-size: 15px;
+  }
+}

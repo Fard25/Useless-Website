@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Pet The Cat</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+
+<body>
+
+    <main class="scene" id="scene">
+
+    <!-- 1920 x 1080 design area, centred inside the viewport-sized scene -->
+    <div class="stage" id="stage">
+
+        <!-- Draggable cursor -->
+        <img
+            class="cursor-mark"
+            id="cursorMark"
+            src="assets/UI/Cursor.svg"
+            alt="Drag the cursor"
+        >
+
+
+        <!-- Fish: appears when the cat is angry, drag it to the cat -->
+        <img
+            class="fish"
+            id="fish"
+            src="assets/UI/Fish.svg"
+            alt="Drag the fish to the cat"
+        >
+
+
+        <!-- ==============================
+             HEADER
+             ============================== -->
+
+        <header class="masthead">
+
+            <img
+                class="title-star title-star-left"
+                src="assets/UI/Title Star.svg"
+                alt=""
+                aria-hidden="true"
+            >
+
+            <h1>PET THE CAT</h1>
+
+            <img
+                class="title-star title-star-right"
+                src="assets/UI/Title Star.svg"
+                alt=""
+                aria-hidden="true"
+            >
+
+        </header>
+
+
+        <!-- ==============================
+             LEFT STARS
+             ============================== -->
+
+        <div
+            class="side-stars side-stars-left"
+            aria-hidden="true"
+        >
+
+            <img
+                class="star star-a"
+                src="assets/UI/Star 1.svg"
+                alt=""
+            >
+
+            <img
+                class="star star-b"
+                src="assets/UI/Star 1.svg"
+                alt=""
+            >
+
+            <img
+                class="star star-c"
+                src="assets/UI/Star 1.svg"
+                alt=""
+            >
+
+            <!-- hearts that take the stars' place while the cat is happy -->
+            <img
+                class="side-hearts"
+                src="assets/UI/Side Hearts.svg"
+                alt=""
+            >
+
+        </div>
+
+        <!-- ==============================
+             RIGHT STARS
+             ============================== -->
+        <div
+            class="side-stars side-stars-right"
+            aria-hidden="true"
+        >
+
+            <img
+                class="star star-a"
+                src="assets/UI/Star 1.svg"
+                alt=""
+            >
+
+            <img
+                class="star star-b"
+                src="assets/UI/Star 1.svg"
+                alt=""
+            >
+
+            <img
+                class="star star-c"
+                src="assets/UI/Star 1.svg"
+                alt=""
+            >
+
+            <!-- hearts that take the stars' place while the cat is happy -->
+            <img
+                class="side-hearts"
+                src="assets/UI/Side Hearts.svg"
+                alt=""
+            >
+
+        </div>
+
+        <!-- ==============================
+             MAIN PLAYGROUND
+             ============================== -->
+
+        <section
+            class="playground"
+            aria-label="Interactive cat playground"
+        >
+
+            <p class="watching-text">
+                <span class="watch-normal">Drag The Mouse! The Cat is Watching</span>
+                <span class="watch-angry" aria-hidden="true">Drag The Fish To The Cat!</span>
+            </p>
+
+
+            <!-- CAT SHADOW -->
+
+            <div
+                class="cat-shadow"
+                aria-hidden="true"
+            ></div>
+
+
+            <!-- ==========================
+                 CAT
+                 ========================== -->
+
+            <div
+                class="cat-wrap"
+                id="cat"
+                aria-label="A cat waiting to be petted"
+            >
+
+                <img
+                    class="cat-tail"
+                    src="assets/Normal Cat/Tail.svg"
+                    alt=""
+                >
+
+                <img
+                    class="cat-left-ear"
+                    src="assets/Normal Cat/Left Ear.svg"
+                    alt=""
+                >
+
+                <img
+                    class="cat-right-ear"
+                    src="assets/Normal Cat/Right Ear.svg"
+                    alt=""
+                >
+
+                <img
+                    class="cat-left-foot"
+                    src="assets/Normal Cat/Left Foot.svg"
+                    alt=""
+                >
+
+                <img
+                    class="cat-right-foot"
+                    src="assets/Normal Cat/Right Foot.svg"
+                    alt=""
+                >
+
+                <img
+                    class="cat-body"
+                    src="assets/Normal Cat/Body.svg"
+                    alt=""
+                >
+
+                <img
+                    class="cat-head"
+                    src="assets/Normal Cat/Head.svg"
+                    alt=""
+                >
+
+                <img
+                    class="cat-stomach"
+                    src="assets/Normal Cat/Stomach.svg"
+                    alt=""
+                >
+
+                <img
+                    class="cat-left-eye"
+                    src="assets/Normal Cat/Left Eye.svg"
+                    alt=""
+                >
+
+                <img
+                    class="cat-right-eye"
+                    src="assets/Normal Cat/Right Eye.svg"
+                    alt=""
+                >
+
+                <img
+                    class="cat-pupil cat-pupil-left"
+                    id="pupilLeft"
+                    src="assets/Normal Cat/Left Pupil 1.svg"
+                    alt=""
+                >
+
+                <img
+                    class="cat-pupil cat-pupil-right"
+                    id="pupilRight"
+                    src="assets/Normal Cat/Right Pupil 1.svg"
+                    alt=""
+                >
+
+                <img
+                    class="cat-nose"
+                    src="assets/Normal Cat/Nose.svg"
+                    alt=""
+                >
+
+                <img
+                    class="cat-mouth"
+                    src="assets/Normal Cat/Mouth.svg"
+                    alt=""
+                >
+
+                <img
+                    class="cat-whiskers"
+                    src="assets/Normal Cat/Whiskers.svg"
+                    alt=""
+                >
+
+                <!-- ===== HAPPY FACE (shown while the cursor hovers the cat) ===== -->
+
+                <img class="happy-part cat-happy-tail" src="assets/Happy Cat/Tail2.svg" alt="">
+
+                <img class="happy-part cat-happy-left-eye" src="assets/Happy Cat/Left Happy Eye.svg" alt="">
+                <img class="happy-part cat-happy-right-eye" src="assets/Happy Cat/Right Happy Eye.svg" alt="">
+
+                <img class="happy-part cat-happy-nose" src="assets/Happy Cat/Nose2.svg" alt="">
+                <img class="happy-part cat-happy-smile" src="assets/Happy Cat/Smile.svg" alt="">
+
+                <img class="happy-part cat-happy-whisker-1" src="assets/Happy Cat/Whisker 1.svg" alt="">
+                <img class="happy-part cat-happy-whisker-2" src="assets/Happy Cat/Whisker 2.svg" alt="">
+                <img class="happy-part cat-happy-whisker-3" src="assets/Happy Cat/Whisker 3.svg" alt="">
+                <img class="happy-part cat-happy-whisker-4" src="assets/Happy Cat/Whisker 4.svg" alt="">
+
+                <!-- ===== ANGRY FACE (shown while the cursor is on the cat's tail or stomach) ===== -->
+
+                <img class="angry-part cat-angry-tail" src="assets/Angry cat/Angry Tail.svg" alt="">
+                <img class="angry-part cat-angry-left-eye" src="assets/Angry cat/Angry Cat Left Eye.svg" alt="">
+                <img class="angry-part cat-angry-right-eye" src="assets/Angry cat/Angry Cat Right Eye.svg" alt="">
+                <img class="angry-part cat-angry-left-brow" src="assets/Angry cat/Left Eyebrow.svg" alt="">
+                <img class="angry-part cat-angry-right-brow" src="assets/Angry cat/Right Eyebrow.svg" alt="">
+                <img class="angry-part cat-angry-mouth" src="assets/Angry cat/Angry Mouth.svg" alt="">
+                <img class="angry-part cat-angry-whisker-1" src="assets/Angry cat/Angry Whisker 1.svg" alt="">
+                <img class="angry-part cat-angry-whisker-2" src="assets/Angry cat/Angry Whisker 2.svg" alt="">
+                <img class="angry-part cat-angry-whisker-3" src="assets/Angry cat/Angry Whisker 3.svg" alt="">
+                <img class="angry-part cat-angry-whisker-4" src="assets/Angry cat/Angry Whisker 4.svg" alt="">
+
+                <!-- ===== "HOLD" HINT (shown while the cursor hovers the cat's head) ===== -->
+
+                <span class="hold-text" aria-hidden="true">Hold</span>
+
+                <!-- ===== HEARTS (shown while the cat is being held / petted) ===== -->
+
+                <div class="hearts" aria-hidden="true">
+                    <span class="heart" style="--x:30px; --y:2px; --s:44px; --r:-15deg; --d:0s"><img src="assets/Happy Cat/Heart.svg" alt=""></span>
+                    <span class="heart" style="--x:92px; --y:-2px; --s:30px; --r:-10deg; --d:0.08s"><img src="assets/Happy Cat/Heart.svg" alt=""></span>
+                    <span class="heart" style="--x:160px; --y:0px; --s:32px; --r:12deg; --d:0.16s"><img src="assets/Happy Cat/Heart.svg" alt=""></span>
+                    <span class="heart" style="--x:-35px; --y:35px; --s:46px; --r:-22deg; --d:0.04s"><img src="assets/Happy Cat/Heart.svg" alt=""></span>
+                    <span class="heart" style="--x:10px; --y:75px; --s:32px; --r:-8deg; --d:0.12s"><img src="assets/Happy Cat/Heart.svg" alt=""></span>
+                    <span class="heart" style="--x:-40px; --y:100px; --s:30px; --r:-14deg; --d:0.2s"><img src="assets/Happy Cat/Heart.svg" alt=""></span>
+                    <span class="heart" style="--x:225px; --y:28px; --s:44px; --r:16deg; --d:0.06s"><img src="assets/Happy Cat/Heart.svg" alt=""></span>
+                    <span class="heart" style="--x:232px; --y:85px; --s:30px; --r:10deg; --d:0.14s"><img src="assets/Happy Cat/Heart.svg" alt=""></span>
+                    <span class="heart" style="--x:270px; --y:50px; --s:32px; --r:18deg; --d:0.22s"><img src="assets/Happy Cat/Heart.svg" alt=""></span>
+                </div>
+
+            </div>
+
+
+            <!-- PET THE CAT LABEL (plain label, not a button) -->
+
+            <div class="pet-label">
+                <span class="pet-label-text pet-label-normal">Pet The Cat</span>
+                <span class="pet-label-text pet-label-happy" aria-hidden="true">He likes it!</span>
+                <span class="pet-label-text pet-label-petting" aria-hidden="true">Purrrr&hellip;</span>
+                <span class="pet-label-text pet-label-angry" aria-hidden="true">Feed him the fish!</span>
+                <span class="pet-label-text pet-label-drop" aria-hidden="true">Drop the fish!</span>
+                <span class="pet-label-text pet-label-fed" aria-hidden="true">Yum! Thank you!</span>
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             MOOD LEGEND
+             ============================== -->
+
+        <section
+            class="legend"
+            aria-label="Cat moods"
+        >
+
+            <div class="legend-item">
+
+                <span
+                    class="mood-icon mood-happy"
+                    aria-hidden="true"
+                >
+
+                    <img
+                        class="mood-head"
+                        src="assets/Legend/Happy Head.svg"
+                        alt=""
+                    >
+                </span>
+
+                <span>=happy</span>
+
+            </div>
+
+
+            <div class="legend-item">
+
+                <span
+                    class="mood-icon mood-angry"
+                    aria-hidden="true"
+                >
+
+                    <img
+                        class="mood-head"
+                        src="assets/Legend/Angry Head.svg"
+                        alt=""
+                    >
+                </span>
+
+                <span>=angry</span>
+
+            </div>
+
+        </section>
+
+
+    </div><!-- /stage -->
+
+
+        <!-- PURPLE OUTER BORDER (fills the whole viewport) -->
+
+        <div
+            class="frame-border"
+            aria-hidden="true"
+        ></div>
+
+    </main>
+
+
+    <!-- ==============================
+         HELP BUTTON + POPUP
+         ============================== -->
+
+    <button
+        class="help-button"
+        id="helpButton"
+        type="button"
+        aria-label="How does the cat work?"
+        aria-haspopup="dialog"
+        aria-controls="helpModal"
+    >
+        <img class="help-circle" src="assets/Help/Help Circle.svg" alt="">
+        <img class="help-mark" src="assets/Help/Question Mark.svg" alt="">
+    </button>
+
+
+    <div class="help-modal" id="helpModal" hidden>
+
+        <div
+            class="help-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="helpTitle"
+        >
+
+            <button
+                class="help-close"
+                id="helpClose"
+                type="button"
+                aria-label="Close"
+            >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 4 L20 20 M20 4 L4 20"></path>
+                </svg>
+            </button>
+
+            <h2 id="helpTitle">How the cat works</h2>
+
+            <ul class="help-list">
+
+                <li>
+                    <strong>Drag the cursor.</strong>
+                    Press and drag the purple arrow around the page.
+                    The cat's eyes follow it wherever it goes.
+                </li>
+
+                <li>
+                    <strong>Hover over the cat.</strong>
+                    When the arrow is on the cat, he gets happy.
+                </li>
+
+                <li>
+                    <strong>Hover over his head.</strong>
+                    A little "Hold" appears, a hint that he'd like
+                    you to stay there.
+                </li>
+
+                <li>
+                    <strong>Hold it there.</strong>
+                    Keep the arrow pressed on the cat for a moment
+                    and hearts float up. Good petting!
+                </li>
+
+                <li>
+                    <strong>Don't touch his tummy!</strong>
+                    Poke the stomach and the cat gets angry,
+                    and he stays angry until he's fed.
+                </li>
+
+                <li>
+                    <strong>Feed him the fish.</strong>
+                    When he's angry a fish appears. Drag it onto the
+                    cat and he'll eat it and be happy again.
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
